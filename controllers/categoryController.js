@@ -24,7 +24,6 @@ exports.createCategory = async (req, res, next) => {
 exports.categoryList = async (req, res, next) => {
   try {
     const categories = await Category.findAll({
-      attributes: ["id", "name"],
       include: {
         model: Ingredient,
         as: "ingredients",
