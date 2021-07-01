@@ -21,12 +21,12 @@ exports.deletIngredient = async (req, res, next) => {
 exports.ingredientList = async (req, res, next) => {
   try {
     const ingredients = await Ingredient.findAll({
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
+      // attributes: {
+      //   exclude: ["createdAt", "updatedAt"],
+      // },
       include: {
-        association: Recipe,
-        as: "recipe",
+        model: Recipe,
+        as: "recipes",
         attributes: ["id"],
       },
     });
@@ -36,15 +36,28 @@ exports.ingredientList = async (req, res, next) => {
   }
 };
 
-exports.createRecipe = async (req, res, next) => {
-  try {
-    if (req.file) {
-      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
-    }
-    req.body.ingredientId = req.params.ingredientId;
-    const newRecipe = await Recipe.create(req.body);
-    res.status(201).json(newRecipe);
-  } catch (error) {
-    next(error);
-  }
-};
+// exports.createRecipe = async (req, res, next) => {
+//   try {
+//     if (req.file) {
+//       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+//     }
+//     req.body.ingredientId = req.params.ingredientId;
+//     const newRecipe = await Recipe.create(req.body);
+//     res.status(201).json(newRecipe);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+// exports.createRecipe = async (req, res, next) => {
+//   try {
+//     if (req.file) {
+//       req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+//     }
+//     req.body.ingredientId = req.params.ingredientId;
+//     const newRecipe = await Recipe.create(req.body);
+//     res.status(201).json(newRecipe);
+//   } catch (error) {
+//     next(error);
+//   }
+// };

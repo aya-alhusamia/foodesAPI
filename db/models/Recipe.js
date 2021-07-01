@@ -19,18 +19,5 @@ module.exports = (sequelize, DataTypes) => {
     source: ["name"],
   });
 
-  // Recipe.associate = (models) => {
-  //   models.Ingredient.belongsToMany(Recipe, {
-  //     through: "recipeIngredient",
-  //     as: "recipes",
-  //     foreignKey: "ingredientId",
-  //   });
-
-  //   Recipe.belongsToMany(models.Ingredient, {
-  //     through: "recipeIngredient",
-  //     as: "ingredients",
-  //     foreignKey: "recipeId",
-  //   });
-  // };
   return Recipe;
 };

@@ -35,5 +35,14 @@ module.exports = (sequelize, DataTypes) => {
     Ingredient.belongsTo(models.Category, { foreignKey: "categoryId" });
   };
 
+  // Ingredient.associate = (models) => {
+  //   models.Recipe.hasMany(Ingredient, {
+  //     foreignKey: "recipeId",
+  //     as: "ingredients",
+  //     allowNull: false,
+  //   });
+  //   Ingredient.belongsTo(models.Recipe, { foreignKey: "recipeId" });
+  // };
+
   return Ingredient;
 };
