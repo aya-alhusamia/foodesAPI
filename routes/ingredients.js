@@ -26,6 +26,12 @@ const upload = multer({
   storage,
 });
 
+router.post(
+  "/:ingredientId/recipes",
+  upload.single("image"),
+  ingredientControler.createRecipe
+);
+
 router.delete("/:ingredientId", ingredientControler.deletIngredient);
 
 router.get("/", ingredientControler.ingredientList);

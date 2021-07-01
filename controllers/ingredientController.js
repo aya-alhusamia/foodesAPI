@@ -1,4 +1,4 @@
-const { Ingredient } = require("../db/models");
+const { Ingredient, Recipe } = require("../db/models");
 
 exports.fetchIngredient = async (ingredientId, next) => {
   try {
@@ -24,8 +24,26 @@ exports.ingredientList = async (req, res, next) => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      include: {
+        association: Recipe,
+        as: "recipe",
+        attributes: ["id"],
+      },
     });
     res.json(ingredients);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.createRecipe = async (req, res, next) => {
+  try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
+    req.body.ingredientId = req.params.ingredientId;
+    const newRecipe = await Recipe.create(req.body);
+    res.status(201).json(newRecipe);
   } catch (error) {
     next(error);
   }

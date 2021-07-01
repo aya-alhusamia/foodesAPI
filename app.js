@@ -17,8 +17,8 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
   res
-    .status(err.status ?? 500)
-    .json({ message: err.message ?? "Intrenal Server Error" });
+    .status(err.status || 500)
+    .json({ message: err.message || "Intrenal Server Error" });
 });
 const PORT = 8000;
 
